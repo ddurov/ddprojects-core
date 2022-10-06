@@ -53,7 +53,7 @@ class Service
     }
 
     /**
-     * Возвращает массив с доменами и хэшаши их сертификатов
+     * Возвращает массив с доменами и хэшаши их сертификатов (в случае ошибки, message: domain is invalid)
      * @param string $domainList
      * @return array
      */
