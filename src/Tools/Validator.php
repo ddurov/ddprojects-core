@@ -48,6 +48,10 @@ class Validator
                         if (!preg_match($option, $fieldData))
                             throw new selfThrows(["message" => "{$field->getName()} parameter should be parsed by regular expression '{$option}'"], 400);
                         break;
+                    case "excludeRegexp":
+                        if (preg_match($option, $fieldData))
+                            throw new selfThrows(["message" => "{$field->getName()} parameter should doesn't parsed by regular expression '{$option}'"], 400);
+                        break;
                 }
             }
         }
