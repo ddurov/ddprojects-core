@@ -67,7 +67,7 @@ class EmailService
     }
 
     /**
-     * Возвращает true в случае успешной проверки, выбрасывает исключение если не успешно
+     * Возвращает true в случае успешной проверки, выбрасывает исключение если неуспешно
      * @param string $code
      * @param string $hash
      * @param int $needRemove
@@ -78,14 +78,14 @@ class EmailService
      */
     public function confirmCode(string $code, string $hash, int $needRemove = 0): bool
     {
-        /** @var EmailModel $emailCodeDetails */
-        $emailCodeDetails = $this->entityRepository->findOneBy(["code" => $code, "hash" => $hash]);
+        /** @var EmailModel $codeDetails */
+        $codeDetails = $this->entityRepository->findOneBy(["code" => $code, "hash" => $hash]);
 
-        if ($emailCodeDetails === null || $emailCodeDetails->getCode() !== $code) throw new InvalidParameter("code");
+        if ($codeDetails === null || $codeDetails->getCode() !== $code) throw new InvalidParameter("parameter 'code' are invalid", 400);
 
-        if ($emailCodeDetails->getHash() !== $hash) throw new InvalidParameter("hash");
+        if ($codeDetails->getHash() !== $hash) throw new InvalidParameter("parameter 'hash' are invalid", 400);
 
-        if ($needRemove === 1) ManagerDatabase::getInstance()->remove($emailCodeDetails);
+        if ($needRemove === 1) ManagerDatabase::getInstance()->remove($codeDetails);
 
         ManagerDatabase::getInstance()->flush();
 

@@ -72,7 +72,7 @@ class SessionService
     public function check(string $sessionId): bool
     {
         if ($this->entityRepository->findOneBy(["sessionId" => $sessionId]) === null)
-            throw new EntityNotFound("session by id");
+            throw new EntityNotFound("current entity 'session by id' not found", 404);
 
         return true;
     }
