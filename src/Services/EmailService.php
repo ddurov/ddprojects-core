@@ -13,7 +13,6 @@ use Exception;
 
 class EmailService
 {
-
     private EntityRepository $entityRepository;
 
     public function __construct(EntityManager $entityManager)
