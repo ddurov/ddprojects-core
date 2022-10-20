@@ -39,10 +39,10 @@ class UserService
     public function registerAccount(string $login, string $password, string $username, string $email): int
     {
         if ($this->entityRepository->findOneBy(["login" => $login]) !== null)
-            throw new EntityExists("current entity 'account by login' are exists", 422);
+            throw new EntityExists("current entity 'account by login' are exists");
 
         if ($this->entityRepository->findOneBy(["username" => $username]) !== null)
-            throw new EntityExists("current entity 'account by username' are exists", 422);
+            throw new EntityExists("current entity 'account by username' are exists");
 
         $passwordSalt = openssl_random_pseudo_bytes(16);
 
@@ -74,9 +74,9 @@ class UserService
         /** @var UserModel $account */
         $account = $this->entityRepository->findOneBy(["login" => $login]);
 
-        if ($account === null) throw new EntityNotFound("current entity 'account by login' not found", 404);
+        if ($account === null) throw new EntityNotFound("current entity 'account by login' not found");
 
-        if (md5($password . $account->getPasswordSalt()) !== $account->getPassword()) throw new InvalidParameter("parameter 'password' are invalid", 400);
+        if (md5($password . $account->getPasswordSalt()) !== $account->getPassword()) throw new InvalidParameter("parameter 'password' are invalid");
 
         /*
         $ban = Database::getInstance()->query("SELECT * FROM general.bans WHERE eid = ?i", $accountAsArray['id']);
@@ -143,7 +143,7 @@ class UserService
         /** @var UserModel $account */
         $account = $this->entityRepository->find($aId ?? ManagerDatabase::getInstance()->getRepository(TokenModel::class)->findOneBy(["token" => $token])->getAid());
 
-        if ($account === null) throw new EntityNotFound("current entity 'account by id' not found", 404);
+        if ($account === null) throw new EntityNotFound("current entity 'account by id' not found");
 
         return [
             "aid" => $account->getId(),
@@ -166,7 +166,7 @@ class UserService
             ->getQuery()->getResult();
 
         if ($accounts === [])
-            throw new EntityNotFound("current entities 'accounts by search' not found", 404);
+            throw new EntityNotFound("current entities 'accounts by search' not found");
 
         $preparedData = [];
 

@@ -70,7 +70,7 @@ class TokenService
     public function check(string $token): bool
     {
         if ($this->entityRepository->findOneBy(["token" => $token]) === null)
-            throw new EntityNotFound("current entity 'token' not found", 404);
+            throw new EntityNotFound("current entity 'token' not found");
 
         return true;
     }

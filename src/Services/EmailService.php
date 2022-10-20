@@ -58,8 +58,8 @@ class EmailService
 
         Mail::getInstance()->isHTML();
         Mail::getInstance()->Subject = "Код подтверждения";
-        Mail::getInstance()->Body = "Код подтверждения: <b>$code</b><br>Данный код будет активен в течении часа с момента получения письма<br>Если вы не запрашивали данное письмо - <b>немедленно смените пароль</b>";
-        Mail::getInstance()->AltBody = "Код подтверждения: $code\nДанный код будет активен в течении часа с момента получения письма\nЕсли вы не запрашивали данное письмо - немедленно смените пароль";
+        Mail::getInstance()->Body = "Код подтверждения: <b>$code</b><br>Данный код будет активен в течение часа с момента получения письма<br>Если вы не запрашивали данное письмо - <b>немедленно смените пароль</b>";
+        Mail::getInstance()->AltBody = "Код подтверждения: $code\nДанный код будет активен в течение часа с момента получения письма\nЕсли вы не запрашивали данное письмо - немедленно смените пароль";
         Mail::getInstance()->send();
 
         return $hash;
@@ -80,9 +80,9 @@ class EmailService
         /** @var EmailModel $codeDetails */
         $codeDetails = $this->entityRepository->findOneBy(["code" => $code, "hash" => $hash]);
 
-        if ($codeDetails === null || $codeDetails->getCode() !== $code) throw new InvalidParameter("parameter 'code' are invalid", 400);
+        if ($codeDetails === null || $codeDetails->getCode() !== $code) throw new InvalidParameter("parameter 'code' are invalid");
 
-        if ($codeDetails->getHash() !== $hash) throw new InvalidParameter("parameter 'hash' are invalid", 400);
+        if ($codeDetails->getHash() !== $hash) throw new InvalidParameter("parameter 'hash' are invalid");
 
         if ($needRemove === 1) ManagerDatabase::getInstance()->remove($codeDetails);
 
