@@ -2,9 +2,7 @@
 
 namespace Core\Exceptions;
 
-use Exception;
-
-class RouteNotFound extends Exception
+class RouteNotFound extends CoreExceptions
 {
     protected $message = "current route not found for this request method";
 

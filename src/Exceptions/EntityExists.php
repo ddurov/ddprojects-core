@@ -2,8 +2,6 @@
 
 namespace Core\Exceptions;
 
-use Exception;
-
-class EntityExists extends Exception {
+class EntityExists extends CoreExceptions {
     protected $code = 422;
 }

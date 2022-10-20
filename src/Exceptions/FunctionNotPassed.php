@@ -2,8 +2,6 @@
 
 namespace Core\Exceptions;
 
-use Exception;
-
-class FunctionNotPassed extends Exception {
+class FunctionNotPassed extends CoreExceptions {
     protected $code = 400;
 }

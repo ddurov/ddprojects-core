@@ -2,8 +2,6 @@
 
 namespace Core\Exceptions;
 
-use Exception;
-
-class InternalError extends Exception {
+class InternalError extends CoreExceptions {
     protected $code = 500;
 }

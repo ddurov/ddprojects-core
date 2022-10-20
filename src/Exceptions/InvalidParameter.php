@@ -2,8 +2,6 @@
 
 namespace Core\Exceptions;
 
-use Exception;
-
-class InvalidParameter extends Exception {
+class InvalidParameter extends CoreExceptions {
     protected $code = 400;
 }
