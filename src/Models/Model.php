@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping\Id;
 class Model
 {
     #[Id, Column(type: "integer"), GeneratedValue(strategy: "IDENTITY")]
-    private int $id;
+    protected int $id;
 
     /**
      * @return int
