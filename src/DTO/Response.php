@@ -83,7 +83,6 @@ class Response
     /**
      * @return void
      */
-    #[NoReturn]
     public function send(): void
     {
         http_response_code($this->code);
