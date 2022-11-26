@@ -9,36 +9,19 @@ class Response
     private array $response;
 
     /**
-     * @param string $status
-     * @return Response
+     * @return int
      */
-    public function setStatus(string $status): Response
+    public function getCode(): int
     {
-        $this->status = $status;
-        return $this;
+        return $this->code;
     }
 
     /**
-     * @param array $response
-     * @return Response
+     * @param int $code
      */
-    public function setResponse(array $response): Response
+    public function setCode(int $code): void
     {
-        $this->response = $response;
-        return $this;
-    }
-
-    public function setCode(int $code): Response {
         $this->code = $code;
-        return $this;
-    }
-
-    /**
-     * @return array
-     */
-    public function getResponse(): array
-    {
-        return $this->response;
     }
 
     /**
@@ -50,20 +33,27 @@ class Response
     }
 
     /**
-     * @return int
+     * @param string $status
      */
-    public function getCode(): int
+    public function setStatus(string $status): void
     {
-        return $this->code;
+        $this->status = $status;
     }
 
     /**
-     * @return string
+     * @return array
      */
-    public function toJson(): string
+    public function getResponse(): array
     {
-        http_response_code($this->code);
-        return json_encode($this->toArray(), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+        return $this->response;
+    }
+
+    /**
+     * @param array $response
+     */
+    public function setResponse(array $response): void
+    {
+        $this->response = $response;
     }
 
     /**
@@ -75,10 +65,19 @@ class Response
     }
 
     /**
+     * @return string
+     */
+    public function toJson(): string
+    {
+        return json_encode($this->toArray(), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+    }
+
+    /**
      * @return void
      */
     public function send(): void
     {
+        http_response_code($this->code);
         die(self::toJson());
     }
 }
