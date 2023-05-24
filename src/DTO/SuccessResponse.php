@@ -16,10 +16,11 @@ class SuccessResponse extends Response
 
     /**
      * @param string $body
-     * @return void
+     * @return SuccessResponse
      */
-    public function setBody(string $body): void
+    public function setBody(string $body): SuccessResponse
     {
         $this->body = $body;
+        return $this;
     }
 }

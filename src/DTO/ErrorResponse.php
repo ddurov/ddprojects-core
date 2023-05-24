@@ -16,10 +16,11 @@ class ErrorResponse extends Response
 
     /**
      * @param string $errorMessage
-     * @return void
+     * @return ErrorResponse
      */
-    public function setErrorMessage(string $errorMessage): void
+    public function setErrorMessage(string $errorMessage): ErrorResponse
     {
         $this->errorMessage = $errorMessage;
+        return $this;
     }
 }
