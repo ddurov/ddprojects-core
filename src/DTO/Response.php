@@ -2,13 +2,10 @@
 
 namespace Core\DTO;
 
-use JetBrains\PhpStorm\NoReturn;
-
 class Response
 {
     private int $code = 200;
     private string $status;
-    private array $response;
 
     /**
      * @return int
@@ -43,24 +40,6 @@ class Response
     public function setStatus(string $status): Response
     {
         $this->status = $status;
-        return $this;
-    }
-
-    /**
-     * @return array
-     */
-    public function getResponse(): array
-    {
-        return $this->response;
-    }
-
-    /**
-     * @param array $response
-     * @return Response
-     */
-    public function setResponse(array $response): Response
-    {
-        $this->response = $response;
         return $this;
     }
 
