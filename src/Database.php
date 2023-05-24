@@ -22,8 +22,15 @@ class Database
      * @throws Exception
      * @throws ORMException
      */
-    public function create(string $dbName, string $dbUser, string $dbPassword, string $dbServer, int $dbPort, string $attributeMetadataFolder, string $dbDriver = "mysqli"): EntityManager
-    {
+    public function create(
+        string $dbName,
+        string $dbUser,
+        string $dbPassword,
+        string $dbServer,
+        int $dbPort,
+        string $attributeMetadataFolder,
+        string $dbDriver = "mysqli"
+    ): EntityManager {
         return EntityManager::create(
             DriverManager::getConnection([
                 'dbname' => $dbName,
