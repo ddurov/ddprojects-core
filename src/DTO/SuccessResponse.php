@@ -2,9 +2,28 @@
 
 namespace Core\DTO;
 
-class SuccessResponse extends Response
+class SuccessResponse
 {
+    private int $code = 200;
     private string $body;
+
+    /**
+     * @return int
+     */
+    public function getCode(): int
+    {
+        return $this->code;
+    }
+
+    /**
+     * @param int $code
+     * @return SuccessResponse
+     */
+    public function setCode(int $code): SuccessResponse
+    {
+        $this->code = $code;
+        return $this;
+    }
 
     /**
      * @return string
@@ -22,5 +41,30 @@ class SuccessResponse extends Response
     {
         $this->body = $body;
         return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function toArray(): array
+    {
+        return get_object_vars($this);
+    }
+
+    /**
+     * @return string
+     */
+    public function toJson(): string
+    {
+        return json_encode($this->toArray(), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+    }
+
+    /**
+     * @return void
+     */
+    public function send(): void
+    {
+        http_response_code($this->code);
+        die($this->toJson());
     }
 }
