@@ -14,11 +14,11 @@
 		}
 	},
 	"require": {
-		"doctrine/orm": "^2.11.0",
-		"doctrine/dbal": "^3.2",
-		"doctrine/annotations": "1.13.2",
-		"symfony/yaml": "^5.4",
-		"symfony/cache": "^5.4",
+		"doctrine/orm": "2.15.1",
+		"doctrine/dbal": "3.6.2",
+		"doctrine/annotations": "2.0.1",
+		"symfony/yaml": "v6.2.10",
+		"symfony/cache": "v6.2.10",
 		"mobiledetect/mobiledetectlib": "2.8.39",
 		"phpmailer/phpmailer": "v6.6.4",
 		"bramus/router": "1.6.1",
