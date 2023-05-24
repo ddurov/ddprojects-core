@@ -2,6 +2,7 @@
 
 namespace Core\Exceptions;
 
-class ParametersException extends CoreExceptions {
+class ParametersException extends CoreExceptions
+{
     protected $code = 400;
 }
