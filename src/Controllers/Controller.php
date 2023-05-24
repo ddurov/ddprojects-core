@@ -2,7 +2,7 @@
 
 namespace Core\Controllers;
 
-use Core\Exceptions\InvalidParameter;
+use Core\Exceptions\ParametersException;
 use Rakit\Validation\Validator;
 
 class Controller
@@ -21,13 +21,13 @@ class Controller
      * @param array $inputs
      * @param array $rules
      * @return void
-     * @throws InvalidParameter
+     * @throws ParametersException
      */
     public function validateData(array $inputs, array $rules): void
     {
         $v = (new Validator())->validate($inputs, $rules);
 
         if (isset($v->errors->all()[0]))
-            throw new InvalidParameter($v->errors->all()[0]);
+            throw new ParametersException($v->errors->all()[0]);
     }
 }

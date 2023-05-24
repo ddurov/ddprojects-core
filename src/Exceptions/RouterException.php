@@ -2,6 +2,7 @@
 
 namespace Core\Exceptions;
 
-class EntityNotFound extends CoreExceptions {
+class RouterException extends CoreExceptions
+{
     protected $code = 404;
 }
