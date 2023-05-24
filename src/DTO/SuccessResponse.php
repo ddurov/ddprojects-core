@@ -15,10 +15,10 @@ class SuccessResponse extends Response
     }
 
     /**
-     * @param string $body
+     * @param mixed $body
      * @return SuccessResponse
      */
-    public function setBody(string $body): SuccessResponse
+    public function setBody(mixed $body): SuccessResponse
     {
         $this->body = $body;
         return $this;
