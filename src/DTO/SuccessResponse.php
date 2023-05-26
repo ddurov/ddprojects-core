@@ -5,7 +5,7 @@ namespace Core\DTO;
 class SuccessResponse
 {
     private int $code = 200;
-    private string $body;
+    private mixed $body;
 
     /**
      * @return int
@@ -26,7 +26,7 @@ class SuccessResponse
     }
 
     /**
-     * @return string
+     * @return mixed
      */
     public function getBody(): string
     {
