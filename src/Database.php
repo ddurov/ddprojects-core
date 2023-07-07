@@ -5,6 +5,7 @@ namespace Core;
 use Doctrine\DBAL\DriverManager;
 use Doctrine\DBAL\Exception;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Exception\MissingMappingDriverImplementation;
 use Doctrine\ORM\ORMSetup;
 
 class Database
@@ -18,7 +19,7 @@ class Database
      * @param string $attributeMetadataFolder
      * @param string $dbDriver
      * @return EntityManager
-     * @throws Exception
+     * @throws Exception|MissingMappingDriverImplementation
      */
     public function create(
         string $dbName,
