@@ -14,4 +14,13 @@ class Other
         $time = date('D M j G:i:s');
         file_put_contents("/tmp/ddLogs/$product.log", "[$time]: $value\n", FILE_APPEND);
     }
+
+    /**
+     * @param mixed $value
+     * @return mixed
+     */
+    public static function correctType(mixed $value): mixed
+    {
+        return json_decode($value) ?? $value;
+    }
 }

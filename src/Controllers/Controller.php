@@ -3,6 +3,7 @@
 namespace Core\Controllers;
 
 use Core\Exceptions\ParametersException;
+use Core\Tools\Other;
 use Rakit\Validation\Validator;
 
 class Controller
@@ -11,6 +12,12 @@ class Controller
 
     public function __construct()
     {
+        foreach ($_GET as $key => $value) {
+            $_GET[$key] = Other::correctType($value);
+        }
+        foreach ($_POST as $key => $value) {
+            $_POST[$key] = Other::correctType($value);
+        }
         self::$inputData = [
             "data" => $_SERVER["REQUEST_METHOD"] === "GET" ? $_GET : $_POST,
             "headers" => $_SERVER
