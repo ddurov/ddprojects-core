@@ -13,15 +13,26 @@ class Controller
     public function __construct()
     {
         foreach ($_GET as $key => $value) {
-            $_GET[$key] = Other::correctType($value);
+            $_GET[$key] = $this->correctValue($value);
         }
         foreach ($_POST as $key => $value) {
-            $_POST[$key] = Other::correctType($value);
+            $_POST[$key] = $this->correctValue($value);
         }
         self::$inputData = [
             "data" => $_SERVER["REQUEST_METHOD"] === "GET" ? $_GET : $_POST,
             "headers" => $_SERVER
         ];
+    }
+
+    private function correctValue(mixed $value): mixed
+    {
+        if (is_array($value)) {
+            $corrected = [];
+            foreach ($value as $keyItem => $valueItem) {
+                $corrected[$keyItem] = (is_array($valueItem)) ? $this->correctValue($valueItem) : Other::correctType($valueItem);
+            }
+            return $corrected;
+        } else return Other::correctType($value);
     }
 
     /**
