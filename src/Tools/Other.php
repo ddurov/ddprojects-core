@@ -4,15 +4,18 @@ namespace Core\Tools;
 
 class Other
 {
+
     /**
+     * @param string $folder
+     * @param string $logName
      * @param mixed $value
-     * @param string $product
+     * @return void
      */
-    public static function log(mixed $value, string $product = "general"): void
+    public static function log(string $folder, string $logName, mixed $value): void
     {
         $value = var_export($value, true);
         $time = date('D M j G:i:s');
-        file_put_contents("/tmp/ddLogs/$product.log", "[$time]: $value\n", FILE_APPEND);
+        file_put_contents("$folder/$logName.log", "[$time]: $value\n", FILE_APPEND);
     }
 
     /**
