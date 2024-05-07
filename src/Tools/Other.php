@@ -4,7 +4,6 @@ namespace Core\Tools;
 
 class Other
 {
-
     /**
      * @param string $folder
      * @param string $logName
@@ -13,6 +12,7 @@ class Other
      */
     public static function log(string $folder, string $logName, mixed $value): void
     {
+        if (!file_exists($folder)) mkdir($folder, 0770, true);
         $value = var_export($value, true);
         $time = date('D M j G:i:s');
         file_put_contents("$folder/$logName.log", "[$time]: $value\n", FILE_APPEND);
