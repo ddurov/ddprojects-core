@@ -13,8 +13,7 @@ use Doctrine\ORM\Tools\Console\EntityManagerProvider\SingleManagerProvider;
 
 class Database
 {
-	private Connection $connection;
-	public EntityManager $entityManager;
+	private EntityManager $entityManager;
 
 	/**
 	 * @param string $attributeMetadataFolder
@@ -36,18 +35,22 @@ class Database
 		int $dbPort = 3306,
 		string $dbDriver = "mysqli",
 	) {
-		$this->connection = DriverManager::getConnection([
-			'dbname' => $dbName,
-			'user' => $dbUser,
-			'password' => $dbPassword,
-			'host' => $dbServer,
-			'port' => $dbPort,
-			'driver' => $dbDriver,
-		]);
 		$this->entityManager = new EntityManager(
-			$this->connection,
+			DriverManager::getConnection([
+				'dbname' => $dbName,
+				'user' => $dbUser,
+				'password' => $dbPassword,
+				'host' => $dbServer,
+				'port' => $dbPort,
+				'driver' => $dbDriver,
+			]),
 			ORMSetup::createAttributeMetadataConfiguration([$attributeMetadataFolder])
 		);
+	}
+
+	public function getEntityManager(): EntityManager
+	{
+		return $this->entityManager;
 	}
 
 	public function executeCLI(): void
