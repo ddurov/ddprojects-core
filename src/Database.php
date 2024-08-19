@@ -2,7 +2,9 @@
 
 namespace Core;
 
-use Doctrine\DBAL\Connection;
+use Core\DTO\ErrorResponse;
+use Core\Exceptions\InternalError;
+use Core\Tools\Other;
 use Doctrine\DBAL\DriverManager;
 use Doctrine\DBAL\Exception;
 use Doctrine\ORM\EntityManager;
@@ -23,8 +25,7 @@ class Database
 	 * @param string $dbServer
 	 * @param int $dbPort
 	 * @param string $dbDriver
-	 * @throws Exception
-	 * @throws MissingMappingDriverImplementation
+	 * @throws InternalError
 	 */
 	public function __construct(
 		string $attributeMetadataFolder,
@@ -35,17 +36,28 @@ class Database
 		int $dbPort = 3306,
 		string $dbDriver = "mysqli",
 	) {
-		$this->entityManager = new EntityManager(
-			DriverManager::getConnection([
-				'dbname' => $dbName,
-				'user' => $dbUser,
-				'password' => $dbPassword,
-				'host' => $dbServer,
-				'port' => $dbPort,
-				'driver' => $dbDriver,
-			]),
-			ORMSetup::createAttributeMetadataConfiguration([$attributeMetadataFolder])
-		);
+		try {
+			$this->entityManager = new EntityManager(
+				DriverManager::getConnection([
+					'dbname' => $dbName,
+					'user' => $dbUser,
+					'password' => $dbPassword,
+					'host' => $dbServer,
+					'port' => $dbPort,
+					'driver' => $dbDriver,
+				]),
+				ORMSetup::createAttributeMetadataConfiguration([$attributeMetadataFolder])
+			);
+		} catch (Exception|MissingMappingDriverImplementation $e) {
+			Other::log(
+				"logs",
+				"database",
+				"Error: " . $e->getMessage() .
+				", on line: " . $e->getLine() .
+				", in: " . $e->getFile()
+			);
+			throw new InternalError("internal error, try later", 500);
+		}
 	}
 
 	public function getEntityManager(): EntityManager
