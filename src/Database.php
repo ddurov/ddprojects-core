@@ -56,7 +56,7 @@ class Database
 				", on line: " . $e->getLine() .
 				", in: " . $e->getFile()
 			);
-			throw new InternalError("internal error, try later", 500);
+			throw new InternalError("internal error, try later");
 		}
 	}
 
