@@ -11,7 +11,10 @@ class Tools
 	 */
 	public static function log(int $type, mixed $value): void
     {
-	    fwrite(($type === 0) ? STDOUT : STDERR, $value);
+	    fwrite(
+		    ($type === 0) ? fopen('php://stdout', 'w') : fopen('php://stderr', 'w'),
+		    $value
+	    );
     }
 
     /**
