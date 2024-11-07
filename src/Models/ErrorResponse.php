@@ -1,6 +1,6 @@
 <?php
 
-namespace Core\DTO;
+namespace Core\Models;
 
 class ErrorResponse
 {

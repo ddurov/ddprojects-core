@@ -1,11 +1,10 @@
 <?php
 
-namespace Core\Controllers;
+namespace Core;
 
-use Core\DTO\ErrorResponse;
-use Core\DTO\SuccessResponse;
 use Core\Exceptions\ParametersException;
-use Core\Tools\Other;
+use Core\Models\ErrorResponse;
+use Core\Models\SuccessResponse;
 use JetBrains\PhpStorm\NoReturn;
 use Rakit\Validation\Validator;
 
@@ -39,10 +38,10 @@ class Controller
         if (is_array($value)) {
             $corrected = [];
             foreach ($value as $keyItem => $valueItem) {
-                $corrected[$keyItem] = (is_array($valueItem)) ? $this->correctValue($valueItem) : Other::correctType($valueItem);
+                $corrected[$keyItem] = (is_array($valueItem)) ? $this->correctValue($valueItem) : Tools::correctType($valueItem);
             }
             return $corrected;
-        } else return Other::correctType($value);
+        } else return Tools::correctType($value);
     }
 
     /**
