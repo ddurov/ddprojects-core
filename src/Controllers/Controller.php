@@ -2,8 +2,11 @@
 
 namespace Core\Controllers;
 
+use Core\DTO\ErrorResponse;
+use Core\DTO\SuccessResponse;
 use Core\Exceptions\ParametersException;
 use Core\Tools\Other;
+use JetBrains\PhpStorm\NoReturn;
 use Rakit\Validation\Validator;
 
 class Controller
@@ -23,6 +26,13 @@ class Controller
             "headers" => $_SERVER
         ];
     }
+
+	#[NoReturn]
+	public function sendResponse(SuccessResponse|ErrorResponse $response): void
+	{
+		http_response_code($response->code);
+		die(json_encode(get_object_vars($response), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
+	}
 
     private function correctValue(mixed $value): mixed
     {
