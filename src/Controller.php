@@ -26,24 +26,6 @@ class Controller
         ];
     }
 
-	#[NoReturn]
-	public function sendResponse(SuccessResponse|ErrorResponse $response): void
-	{
-		http_response_code($response->code);
-		die(json_encode(get_object_vars($response), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
-	}
-
-    private function correctValue(mixed $value): mixed
-    {
-        if (is_array($value)) {
-            $corrected = [];
-            foreach ($value as $keyItem => $valueItem) {
-                $corrected[$keyItem] = (is_array($valueItem)) ? $this->correctValue($valueItem) : Tools::correctType($valueItem);
-            }
-            return $corrected;
-        } else return Tools::correctType($value);
-    }
-
     /**
      * @param array $inputs
      * @param array $rules
@@ -57,4 +39,22 @@ class Controller
         if (isset($v->errors->all()[0]))
             throw new ParametersException($v->errors->all()[0]);
     }
+
+	#[NoReturn]
+	public static function sendResponse(SuccessResponse|ErrorResponse $response): void
+	{
+		http_response_code($response->code);
+		die(json_encode(get_object_vars($response), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
+	}
+
+	private function correctValue(mixed $value): mixed
+	{
+		if (is_array($value)) {
+			$corrected = [];
+			foreach ($value as $keyItem => $valueItem) {
+				$corrected[$keyItem] = (is_array($valueItem)) ? $this->correctValue($valueItem) : Tools::correctType($valueItem);
+			}
+			return $corrected;
+		} else return Tools::correctType($value);
+	}
 }
