@@ -10,7 +10,8 @@ use Rakit\Validation\Validator;
 
 class Controller
 {
-    public static array $inputData;
+	public array $data;
+	public array $headers;
 
     public function __construct()
     {
@@ -20,10 +21,8 @@ class Controller
         foreach ($_POST as $key => $value) {
             $_POST[$key] = $this->correctValue($value);
         }
-        self::$inputData = [
-            "data" => $_SERVER["REQUEST_METHOD"] === "GET" ? $_GET : $_POST,
-            "headers" => $_SERVER
-        ];
+		$this->data = $_SERVER["REQUEST_METHOD"] === "GET" ? $_GET : $_POST;
+		$this->headers = $_SERVER;
     }
 
     /**
