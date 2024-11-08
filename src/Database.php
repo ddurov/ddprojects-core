@@ -6,7 +6,6 @@ use Doctrine\DBAL\DriverManager;
 use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\Tools\DsnParser;
 use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\Exception\MissingMappingDriverImplementation;
 use Doctrine\ORM\ORMSetup;
 use Doctrine\ORM\Tools\Console\ConsoleRunner;
 use Doctrine\ORM\Tools\Console\EntityManagerProvider\SingleManagerProvider;
@@ -17,7 +16,6 @@ class Database implements Singleton
 	private EntityManager $entityManager;
 
 	/**
-	 * @throws MissingMappingDriverImplementation
 	 * @throws Exception
 	 */
 	public function __construct(string $url) {
@@ -30,7 +28,6 @@ class Database implements Singleton
 	}
 
 	/**
-	 * @throws MissingMappingDriverImplementation
 	 * @throws Exception
 	 */
 	public static function getInstance(): ?Database
@@ -42,7 +39,6 @@ class Database implements Singleton
 	}
 
 	/**
-	 * @throws MissingMappingDriverImplementation
 	 * @throws Exception
 	 */
 	public function getEntityManager(): EntityManager
@@ -51,7 +47,6 @@ class Database implements Singleton
 	}
 
 	/**
-	 * @throws MissingMappingDriverImplementation
 	 * @throws Exception
 	 */
 	public function executeCLI(): void
