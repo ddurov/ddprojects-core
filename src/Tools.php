@@ -17,12 +17,15 @@ class Tools
 	    );
     }
 
-    /**
-     * @param mixed $value
-     * @return mixed
-     */
-    public static function correctType(mixed $value): mixed
-    {
-        return json_decode($value) ?? $value;
-    }
+	public static function correctValue(mixed $value): mixed
+	{
+		if (is_array($value)) {
+			$corrected = [];
+			foreach ($value as $keyItem => $valueItem) {
+				$corrected[$keyItem] = (is_array($valueItem)) ?
+					self::correctValue($valueItem) : (json_decode($valueItem) ?? $valueItem);
+			}
+			return $corrected;
+		} else return (json_decode($value) ?? $value);
+	}
 }

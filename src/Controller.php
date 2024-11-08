@@ -16,10 +16,10 @@ class Controller
     public function __construct()
     {
         foreach ($_GET as $key => $value) {
-            $_GET[$key] = $this->correctValue($value);
+            $_GET[$key] = Tools::correctValue($value);
         }
         foreach ($_POST as $key => $value) {
-            $_POST[$key] = $this->correctValue($value);
+            $_POST[$key] = Tools::correctValue($value);
         }
 		$this->data = $_SERVER["REQUEST_METHOD"] === "GET" ? $_GET : $_POST;
 		$this->headers = $_SERVER;
@@ -44,16 +44,5 @@ class Controller
 	{
 		http_response_code($response->code);
 		die(json_encode(get_object_vars($response), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
-	}
-
-	private function correctValue(mixed $value): mixed
-	{
-		if (is_array($value)) {
-			$corrected = [];
-			foreach ($value as $keyItem => $valueItem) {
-				$corrected[$keyItem] = (is_array($valueItem)) ? $this->correctValue($valueItem) : Tools::correctType($valueItem);
-			}
-			return $corrected;
-		} else return Tools::correctType($value);
 	}
 }
