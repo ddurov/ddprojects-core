@@ -13,7 +13,7 @@ class Tools
     {
 	    fwrite(
 		    ($type === 0) ? fopen('php://stdout', 'w') : fopen('php://stderr', 'w'),
-		    $value
+		    var_export($value, true)
 	    );
     }
 
