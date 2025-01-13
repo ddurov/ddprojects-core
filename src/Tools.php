@@ -10,12 +10,12 @@ class Tools
 	 * @return void
 	 */
 	public static function log(int $type, mixed $value): void
-    {
-	    fwrite(
-		    ($type === 0) ? fopen('php://stdout', 'w') : fopen('php://stderr', 'w'),
-		    var_export($value, true)
-	    );
-    }
+	{
+		fwrite(
+			($type === 0) ? fopen('php://stdout', 'w') : fopen('php://stderr', 'w'),
+			var_export($value, true)
+		);
+	}
 
 	public static function correctValue(mixed $value): mixed
 	{

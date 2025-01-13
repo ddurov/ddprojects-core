@@ -1,27 +1,27 @@
 {
-	"name": "ddprojects/core",
-	"description": "core of all ddProjects products",
-	"type": "library",
-	"authors": [
-		{
-			"name": "ddurov",
-			"email": "admin@ddproj.ru"
-		}
-	],
-	"autoload": {
-		"psr-4": {
-			"Core\\": "src"
-		}
-	},
-	"require": {
-		"doctrine/orm": "^3.3",
-		"doctrine/dbal": "^4.2",
-		"symfony/cache": "^7.1",
-		"phpmailer/phpmailer": "^6.9",
-		"bramus/router": "^1.6",
-		"rakit/validation": "^1.4",
-		"php": ">=8.0",
-		"ext-mbstring": "*",
-		"ext-openssl": "*"
-	}
+  "name": "ddprojects/core",
+  "description": "core of all ddProjects products",
+  "type": "library",
+  "authors": [
+    {
+      "name": "ddurov",
+      "email": "admin@ddproj.ru"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Core\\": "src"
+    }
+  },
+  "require": {
+    "doctrine/orm": "^3.3",
+    "doctrine/dbal": "^4.2",
+    "symfony/cache": "^7.2",
+    "phpmailer/phpmailer": "^6.9",
+    "bramus/router": "^1.6",
+    "rakit/validation": "^1.4",
+    "php": ">=8.0",
+    "ext-mbstring": "*",
+    "ext-openssl": "*"
+  }
 }

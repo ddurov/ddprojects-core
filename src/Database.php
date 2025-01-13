@@ -18,7 +18,8 @@ class Database implements Singleton
 	/**
 	 * @throws Exception
 	 */
-	public function __construct(string $url) {
+	public function __construct(string $url)
+	{
 		$this->entityManager = new EntityManager(
 			DriverManager::getConnection(
 				(new DsnParser())->parse($url)
@@ -30,12 +31,9 @@ class Database implements Singleton
 	/**
 	 * @throws Exception
 	 */
-	public static function getInstance(): ?Database
+	public function executeCLI(): void
 	{
-		if (self::$instance === null) {
-			self::$instance = new Database((string)getenv("DATABASE_URL"));
-		}
-		return self::$instance;
+		ConsoleRunner::run(new SingleManagerProvider(self::getEntityManager()));
 	}
 
 	/**
@@ -49,8 +47,11 @@ class Database implements Singleton
 	/**
 	 * @throws Exception
 	 */
-	public function executeCLI(): void
+	public static function getInstance(): ?Database
 	{
-		ConsoleRunner::run(new SingleManagerProvider(self::getEntityManager()));
+		if (self::$instance === null) {
+			self::$instance = new Database((string)getenv("DATABASE_URL"));
+		}
+		return self::$instance;
 	}
 }

@@ -4,4 +4,6 @@ namespace Core\Exceptions;
 
 use Exception;
 
-class CoreExceptions extends Exception { /* class only for API exceptions */ }
+class CoreExceptions extends Exception /* class only for API exceptions */
+{
+}

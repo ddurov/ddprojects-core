@@ -4,8 +4,8 @@ namespace Core\Models;
 
 class ErrorResponse
 {
-    public int $code;
-    public string $errorMessage;
+	public int $code;
+	public string $errorMessage;
 
 	/**
 	 * @param string $errorMessage

@@ -4,8 +4,8 @@ namespace Core\Models;
 
 class SuccessResponse
 {
-    public int $code;
-    public mixed $body;
+	public int $code;
+	public mixed $body;
 
 	/**
 	 * @param mixed $body

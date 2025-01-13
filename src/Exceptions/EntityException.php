@@ -2,4 +2,6 @@
 
 namespace Core\Exceptions;
 
-class EntityException extends CoreExceptions {}
+class EntityException extends CoreExceptions
+{
+}

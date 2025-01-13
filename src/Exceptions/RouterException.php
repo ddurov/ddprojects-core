@@ -4,5 +4,5 @@ namespace Core\Exceptions;
 
 class RouterException extends CoreExceptions
 {
-    protected $code = 404;
+	protected $code = 404;
 }
